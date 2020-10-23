@@ -17,7 +17,7 @@ def main(session):
     leds_service = session.service("ALLeds")
 
     # Example showing a one second rasta animation
-    duration = 1.0
+    duration = 5.0
     leds_service.rasta(duration)
     
     # Print the names of all the groups
