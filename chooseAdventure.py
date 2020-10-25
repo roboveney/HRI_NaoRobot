@@ -20,7 +20,7 @@ def main(session):
                         u1:(Arthur) Awesome
                         u1:(Gordon) Cool'''
                         
-                        ''''proposal: %Another Would you like to hear another story?
+                        '''proposal: %Another Would you like to hear another story?\n
                        u1:(yes) ^gotoReactivate(Choices)
                        u1:(no) OK, have a good day'''
                         )
@@ -34,66 +34,66 @@ def main(session):
                        u1:(Continue) Ok she decides to continue ^gotoReactivate(startContinue)'''
                        
                        #1
-                       ''''proposal: %startRest As she takes a rest, a wolf appears. Do they talk with the wolf or run away?\n
+                       '''proposal: %startRest As she takes a rest, a wolf appears. Do they talk with the wolf or run away?\n
                        u1:(Talk) ^gotoReactivate(restTalk)
                        u1:(Run) ^gotoReactivate(restRun)'''
                        
                        #2
-                       ''''proposal: %startContinue She continues along the path to her grandma's house. Grandma is baking cookies! Does she stay to help her bake, 
+                       '''proposal: %startContinue She continues along the path to her grandma's house. Grandma is baking cookies! Does she stay to help her bake, 
                        or does she head back home after delivering the supplies?\n
                        u1:(Stay) ^gotoReactivate(continueStay)
                        u1:(Leave) ^gotoReactivate(continueLeave)'''
                        
                        #1-1
-                       ''''proposal: %restTalk She decides to talk to the wolf who says he's on his way to visit an old lady. Do they go with the wolf or go by themselves?\n
+                       '''proposal: %restTalk She decides to talk to the wolf who says he's on his way to visit an old lady. Do they go with the wolf or go by themselves?\n
                        u1:(Wolf) ^gotoReactivate(talkWolf)
                        u1:(Alone) ^gotoReactivate(talkAlone)'''
                        
                        #1-2
-                       ''''proposal: %restRun Little Red Ridding Hood tries to continue to Grandma's house, but she doesn't remember which way to go! Does she go down the
+                       '''proposal: %restRun Little Red Ridding Hood tries to continue to Grandma's house, but she doesn't remember which way to go! Does she go down the
                        path to the left or the right?\n
                        u1:(left) ^gotoReactivate(runLeft)
                        u1:(right) ^gotoReactivate(runRight)'''
                        
                        #2-1
-                       ''''proposal: %continueStay She decides to stay to help Grandma bake cookies. Grandma thanks her for all the help and for the supplies that she brought.
+                       '''proposal: %continueStay She decides to stay to help Grandma bake cookies. Grandma thanks her for all the help and for the supplies that she brought.
                        In fact grandma is so happy that she gives Red a big hug along with an entire batch of cookies!The end, Did you enjoy the story?\n
                        u1:(yes) I'm glad you helped make it an interesting story ^topicTagReactivate(storySetup, Another)
                        u1:(no) I'm sorry ^topicTagReactivate(storySetup, Another)'''
                        
                        #2-2
-                       ''''proposal: %continueLeave Little Red Riding Hood had a lovely walk in the woods, and got to talk with Grandma, but the day wasn't very interesting. 
+                       '''proposal: %continueLeave Little Red Riding Hood had a lovely walk in the woods, and got to talk with Grandma, but the day wasn't very interesting. 
                        Maybe she will have an adventure tomorrow instead. The end, Did you enjoy the story?\n
                        u1:(yes) I'm glad you helped make it an interesting story ^topicTagReactivate(storySetup, Another)
                        u1:(no) I'm sorry ^topicTagReactivate(storySetup, Another)'''
                        
                        #1-1-1
-                       ''''proposal: %talkWolf She goes with the wolf to the old lady's house. The house turns out to be her grandma's! It also turns out that the wolf, who introduces himself as Mr. Lupin, 
+                       '''proposal: %talkWolf She goes with the wolf to the old lady's house. The house turns out to be her grandma's! It also turns out that the wolf, who introduces himself as Mr. Lupin, 
                        is the local milk man! He deliver's grandma's milk and grandma invites both of them in for milk and cookies. The end, Did you enjoy the story?\n
                        u1:(yes) I'm glad you helped make it an interesting story ^topicTagReactivate(storySetup, Another)
                        u1:(no) I'm sorry ^topicTagReactivate(storySetup, Another)'''
                        
                        #1-1-2
-                       ''''proposal: %talkALone The wolf gives them a gallon of milk. It turns out he is the local milkman! Apparently he was on his way to deliver the milk to grandma. Little red riding hood
+                       '''proposal: %talkALone The wolf gives them a gallon of milk. It turns out he is the local milkman! Apparently he was on his way to deliver the milk to grandma. Little red riding hood
                        happily skips through the forest towards her grandma's house where they have milk and cookies!The end, Did you enjoy the story?\n
                        u1:(yes) I'm glad you helped make it an interesting story ^topicTagReactivate(storySetup, Another)
                        u1:(no) I'm sorry ^topicTagReactivate(storySetup, Another)'''
                        
                        #1-2-1
-                       ''''proposal: %runLeft As she makes her way down the path, it turns out this trail leads back to her own house! Unfortunately it is so late that she will have to try going to Grandma's
+                       '''proposal: %runLeft As she makes her way down the path, it turns out this trail leads back to her own house! Unfortunately it is so late that she will have to try going to Grandma's
                        house tomorrow instead. The end, Did you enjoy the story?\n
                        u1:(yes) I'm glad you helped make it an interesting story ^topicTagReactivate(storySetup, Another)
                        u1:(no) I'm sorry ^topicTagReactivate(storySetup, Another)'''
                        
                        #1-2-2
-                       ''''proposal: %runRight Little Red Ridding Hood goes down the right path, where she ends up by a beautiful lake! The water is blue, the sun is warm and she is a little hungry from all
+                       '''proposal: %runRight Little Red Ridding Hood goes down the right path, where she ends up by a beautiful lake! The water is blue, the sun is warm and she is a little hungry from all
                        the walking. She decides to have a happy snack under a tree by the lake and take a nap. Little Red Riding hood had a great day but unfortunately Grandma never got the supplies that she
                        needed, oh no! The end, Did you enjoy the story?\n
                        u1:(yes) I'm glad you helped make it an interesting story ^topicTagReactivate(storySetup, Another)
                        u1:(no) I'm sorry ^topicTagReactivate(storySetup, Another)'''
                        
                        #
-                       ''''proposal: %  \n
+                       '''proposal: %  \n
                        u1:() ^gotoReactivate()
                        u1:() ^gotoReactivate()'''
                        )                  
@@ -108,14 +108,14 @@ def main(session):
 
     # Starting the dialog engine - we need to type an arbitrary string as the identifier
     # We subscribe only ONCE, regardless of the number of topics we have activated
-    ALDialog.subscribe('storySetup')
+    ALDialog.subscribe('Story_Time')
 
     try:
         raw_input("\nSpeak to the robot using rules from both the activated topics. Press Enter when finished:")
     finally:
         # stopping the dialog engine
     
-        ALDialog.unsubscribe('storySetup')
+        ALDialog.unsubscribe('Story_Time')
 
         # Deactivating all topics
         ALDialog.deactivateTopic(topic_name_1)
