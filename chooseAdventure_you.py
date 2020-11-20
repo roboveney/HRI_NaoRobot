@@ -9,12 +9,12 @@ def main(session):
     ALDialog = session.service("ALDialog")
     ALDialog.setLanguage("English")
     vol = session.service("ALTextToSpeech")
-    vol.setVolume(0.3)
+    vol.setVolume(0.6)
     
     # writing topics' qichat code as text strings (end-of-line characters are important!)
     topic_content_1 = ('topic: ~Begin()\n'
                        'language: enu\n'
-                       'concept:(stories)["Little Red Riding Hood" "King Arthur" "Flash Gordon"]\n'
+                       'concept:(stories)["Little Red Riding Hood" "King Arthur" "or Flash Gordon"]\n'
                        
                        'u:(Test Function) ^topicTagReactivate(Hood, info)\n'
                        
@@ -32,20 +32,20 @@ def main(session):
 
     topic_content_2 = ('topic: ~Hood()\n'
                        'language: enu\n'
-                       'concept:(names) [Christina]\n'
+                       'concept:(names) [Megan Christina]\n'
                        
                        'u:(Nao Restart) Ok lets start over ^gotoReactivate(Begin,Choices)\n'
                        
                        '''proposal: %who Would you like to be the main character in the story?\n
                        u1:(yes) ^gotoReactivate(info)
-                       u1:(no) Ok then, are you sitting comfortable good, then we will begin. $Pronoun=She $Name="Little Red Ridding Hood" ^gotoReactivate(start)\n'''
+                       u1:(no) Ok then, are you sitting comfortable good, then we will begin. $Pronoun=She $Name="Little Red Riding Hood" ^gotoReactivate(start)\n'''
                        
                        '''proposal: %info What name would you like me to call you in the story?\n
                        u:({My name is} _~names) Ok $1 $Name=$1 ^goto(start)'''
                        
            #Something is wrong with the below proposal            
-                       '''proposal: %start ["$Name is $Name=="Little Red Ridding Hood"" "$Name, you are"] going to deliver supplies to ["your $Pronoun==You" "her $Pronoun==She"] grandmother in the woods. $Pronoun notice some pretty flowers and fruits.
-                       ["Does she $Name=="Little Red Ridding Hood"" "Do you"] rest to smell the flowers and have a snack, or coninue along the path?\n
+                       '''proposal: %start ["$Name is $Pronoun==She" "$Name, you are"] going to deliver supplies to ["your $Pronoun==You" "her $Pronoun==She"] grandmother in the woods. $Pronoun notice some pretty flowers and fruits.
+                       ["Does she $Pronoun==She" "Do you"] rest to smell the flowers and have a snack, or coninue along the path?\n
                        u1:(Rest) Ok $Pronoun decides to rest ^gotoReactivate(startRest)
                        u1:(Continue) Ok $Pronoun decides to continue ^gotoReactivate(startContinue)'''
                        
@@ -53,7 +53,7 @@ def main(session):
                        u1:(Rest) Ok you decide to rest ^gotoReactivate(startRest)'''
                        
                        #1
-                       '''proposal: %startRest As $Pronoun takes a rest, a wolf appears. ["Does she $Name=="Little Red Ridding Hood"" "Do you"] talk with the wolf or run away?\n
+                       '''proposal: %startRest As $Pronoun takes a rest, a wolf appears. ["Does she $Pronoun==She" "Do you"] talk with the wolf or run away?\n
                        u1:(Talk) ^gotoReactivate(restTalk)
                        u1:(Run) ^gotoReactivate(restRun)'''
                        
@@ -64,13 +64,13 @@ def main(session):
                        u1:(Leave) ^gotoReactivate(continueLeave)'''
                        
                        #1-1
-                       '''proposal: %restTalk $Pronoun decides to talk to the wolf who says he's on his way to visit an old lady. ["Does she $Name=="Little Red Ridding Hood"" "Do you"] go with the wolf or go by ["yourself $Pronoun==You" "herself $Pronoun==She"]?\n
+                       '''proposal: %restTalk $Pronoun decides to talk to the wolf who says he's on his way to visit an old lady. ["Does she $Pronoun==She" "Do you"] go with the wolf or go by ["yourself $Pronoun==You" "herself $Pronoun==She"]?\n
                        u1:(Wolf) ^gotoReactivate(talkWolf)
                        u1:(Alone) ^gotoReactivate(talkAlone)'''
                        
                        #1-1-1
-                       '''proposal: %talkWolf ["$Name goes $Name=="Little Red Ridding Hood"" "$Name, you go"] with the wolf to the old lady's house. The house turns out to be ["your $Pronoun==You" "her $Pronoun==She"] grandma's! It also turns out that the wolf, who introduces 
-                       himself as Mr. Lupin, is the local milk man! He deliver's grandma's milk and grandma invites both of them in for milk and cookies. The end. Did you enjoy the story?\n
+                       '''proposal: %talkWolf ["$Name goes $Pronoun==She" "$Name, you go"] with the wolf to the old lady's house. The house turns out to be ["your $Pronoun==You" "her $Pronoun==She"] grandma's! It also turns out that the wolf, who introduces 
+                       himself as Mr. Lupin, is the local milk man! He deliver's grandma's milk and grandma invites both of ["them $Pronoun==She" "you"] in for milk and cookies. The end. Did you enjoy the story?\n
                        u1:(yes) I'm glad! You helped make it an interesting story ^topicTagReactivate(Begin, Another)
                        u1:(no) I'm sorry ^topicTagReactivate(Begin, Another)'''
                        )

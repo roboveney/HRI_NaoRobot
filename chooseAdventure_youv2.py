@@ -9,7 +9,7 @@ def main(session):
     ALDialog = session.service("ALDialog")
     ALDialog.setLanguage("English")
     vol = session.service("ALTextToSpeech")
-    vol.setVolume(0.3)
+    vol.setVolume(0.6)
     
     # writing topics' qichat code as text strings (end-of-line characters are important!)
     topic_content_1 = ('topic: ~Begin()\n'
@@ -85,6 +85,13 @@ def main(session):
                        '''proposal: %runLeft As ["She makes her $Pronoun==She" "you make your"] way down the path, it turns out this trail leads back to ["her $Pronoun==She" "your"] own house! Unfortunately it is so late that $Pronoun will have to try going to Grandma's
                        house tomorrow instead. The end, Did you enjoy the story?\n
                        u1:(yes) I'm glad you helped make it an interesting story ^topicTagReactivate(storySetup, Another)
+                       u1:(no) I'm sorry ^topicTagReactivate(storySetup, Another)'''
+                       
+                       #1-2-2
+                       '''proposal: %runRight She goes down the right path and ends up by a beautiful lake! The water is blue, the sun is warm and she is feeling a little hungry from all
+                       the walking. She decides to have a delicious snack under a tree by the lake and take a nap. Little Red Ridding Hood had a great day but unfortunately her Grandma never got the supplies that she
+                       needed, oh no!... The end, Did you enjoy the story?\n
+                       u1:(yes) I'm glad you helped make it an interesting story
                        u1:(no) I'm sorry ^topicTagReactivate(storySetup, Another)'''
                        )
         # Loading the topics directly as text strings

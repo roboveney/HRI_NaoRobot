@@ -9,15 +9,7 @@ def main(session):
     ALDialog = session.service("ALDialog")
     ALDialog.setLanguage("English")
     vol = session.service("ALTextToSpeech")
-    vol.setVolume(0.3)
-    
-    #Set up facetracking
-    motion_service = session.service("ALMotion")
-    tracker_service = session.service("ALTracker")
-    motion_service.wakeUp()
-    targetName = "Face"
-    tracker_service.registerTarget("Face")
-    tracker_service.track(targetName)
+    vol.setVolume(0.6)
     
     # writing topics' qichat code as text strings (end-of-line characters are important!)
     topic_content_1 = ('topic: ~Begin()\n'
@@ -33,66 +25,61 @@ def main(session):
                         u1:(Arthur) Awesome
                         u1:(Gordon) Cool'''
                         
-                        '''proposal: %Another Would you like to hear another story?
-                       u1:(yes) ^gotoReactivate(Choices)
+                       '''proposal: %Another Would you like to hear another story?
+                       u1:(yes) Ok ^gotoReactivate(Choices)
                        u1:(no) OK, have a good day'''
-                        )
+                       )
 
     topic_content_2 = ('topic: ~Hood()\n'
                        'language: enu\n'
-                       'concept:(names) [Christina Megan Nathan]\n'
+                       'concept:(names) [Megan Christina]\n'
                        
                        'u:(Nao Restart) Ok lets start over ^gotoReactivate(Begin,Choices)\n'
                        
                        '''proposal: %who Would you like to be the main character in the story?\n
                        u1:(yes) ^gotoReactivate(info)
-                       u1:(no) Ok then, are you sitting comfortable, good, then we will begin. $Pronoun=She $Name="Little Red Ridding Hood" ^gotoReactivate(start)'''
+                       u1:(no) Ok then, are you sitting comfortable good, then we will begin.^gotoReactivate(start)'''
                        
                        '''proposal: %info What name would you like me to call you in the story?\n
-                       u:({My name is} _~names) Ok $1 , are you sitting comfortable, good, then we will begin. $Name=$1 $Pronoun=You ^gotoReactivate(start)'''
+                       u:({My name is} _~names) Ok $1 $Name=$1 ^goto(start)'''
                        
-           #Something was wrong with the below proposal this is a re-edit     
-                       '''proposal: %start ["$Name is $Pronoun==She" "$Name, you are"] going to deliver supplies to ["her $Pronoun==She" "your"] grandmother who lives in teh woods. $Pronoun notice some pretty flowers and fruits.
-                       ["Does she $Pronoun==She", "Do you"] rest to smell the flowers and have a snack, or continue along the path?\n
-                       u1:(Rest) Ok $Pronoun decides to rest ^gotoReactivate(startRest)
-                       u1:(Continue) Ok $Pronoun decides to continue ^gotoReactivate(startContinue)'''
-                       
-            #Hard coded replacement for start that worked
-                       #'''proposal: %start $Name you are going to deliver supplies to your grandmother in the woods. $Pronoun notice some pretty flowers and fruits. Do you rest to smell the flowers and have a snack, or continue along the path?\n
-                       #u1:(Rest) Ok you decide to rest ^gotoReactivate(startRest)'''
+                       '''proposal: %start $Name, you are going to deliver supplies to your grandmother in the woods. You notice some pretty flowers and fruits. Do you rest to smell the flowers and have a snack, or continue along the path?\n
+                       u1:(Rest) Ok you decide to rest ^gotoReactivate(startRest)
+                       u1:(Continue) ^gotoReactivate(startContinue)'''
                        
                        #1
-                       '''proposal: %startRest As $Pronoun takes a rest, a wolf appears. ["Does she $Pronoun==She" "Do you"] talk with the wolf or run away?\n
+                       '''proposal: %startRest As you takes a rest, a wolf appears. Do you talk with the wolf or run away?\n
                        u1:(Talk) ^gotoReactivate(restTalk)
                        u1:(Run) ^gotoReactivate(restRun)'''
                        
                        #2
-                       '''proposal: %startContinue $Pronoun continues along the path to ["her $Pronoun==She" "your"] grandma's house. Grandma is baking cookies! Does $Pronoun stay to help her bake, 
+                       '''proposal: %startContinue You continue along the path to your grandma's house. Grandma is baking cookies! Does $Pronoun stay to help her bake, 
                        or does $Pronoun head back home after delivering the supplies?\n
                        u1:(Stay) ^gotoReactivate(continueStay)
                        u1:(Leave) ^gotoReactivate(continueLeave)'''
                        
                        #1-1
-                       '''proposal: %restTalk $Pronoun decides to talk to the wolf who says he's on his way to visit an old lady. ["Does she $Pronoun==She" "Do you"] go with the wolf or go by ["herself $Pronoun==She" "yourself" ]?\n
+                       '''proposal: %restTalk $Name, you decide to talk to the wolf who says he's on his way to visit an old lady. Do you go with the wolf or go by yourself?\n
                        u1:(Wolf) ^gotoReactivate(talkWolf)
                        u1:(Alone) ^gotoReactivate(talkAlone)'''
                        
                        #1-2
-                       '''proposal: %restRun ["$Name tries $Pronoun==She" "$Name you try"] to continue to Grandma's house, but ["She doesnt $Pronoun==She" "you don't"] remember which way to go! ["Does she $Pronoun==She" "Do you"] go down the
+                       '''proposal: %restRun $Name you try to continue to Grandma's house, but you don't remember which way to go! Do you go down the
                        path to the left or the right?\n
                        u1:(left) ^gotoReactivate(runLeft)
                        u1:(right) ^gotoReactivate(runRight)'''
                        
                        #1-1-1
-                       '''proposal: %talkWolf ["$Name goes $Pronoun==She" "$Name, you go"] with the wolf to the old lady's house. The house turns out to be ["her $Pronoun==She" "your"] grandma's! It also turns out that the wolf, who introduces 
-                       himself as Mr. Lupin, is the local milk man! He deliver's grandma's milk and grandma invites both of them in for milk and cookies. The end. Did you enjoy the story?\n
+                       '''proposal: %talkWolf You go with the wolf to the old lady's house. The house turns out to be your grandma's! It also turns out that the wolf, who introduces 
+                       himself as Mr. Lupin, is the local milk man! He deliver's grandma's milk and grandma invites both of you in for milk and cookies. The end. Did you enjoy the story?\n
                        u1:(yes) I'm glad! You helped make it an interesting story ^topicTagReactivate(Begin, Another)
                        u1:(no) I'm sorry ^topicTagReactivate(Begin, Another)'''
-    
-                        #1-2-1
-                       '''proposal: %runLeft As ["She makes her $Pronoun==She" "you make your"] way down the path, it turns out this trail leads back to ["her $Pronoun==She" "your"] own house! Unfortunately it is so late that $Pronoun will have to try going to Grandma's
-                       house tomorrow instead. The end, Did you enjoy the story?\n
-                       u1:(yes) I'm glad you helped make it an interesting story ^topicTagReactivate(storySetup, Another)
+                       
+                       #1-2-2
+                       '''proposal: %runRight You go down the right path and end up by a beautiful lake! The water is blue, the sun is warm and you are feeling a little hungry from all
+                       the walking. You decide to have a delicious snack under a tree by the lake and take a nap. $Name you had a great day but unfortunately Grandma never got the supplies that she
+                       needed, oh no! The end, Did you enjoy the story?\n
+                       u1:(yes) I'm glad you helped make it an interesting story
                        u1:(no) I'm sorry ^topicTagReactivate(storySetup, Another)'''
                        )
         # Loading the topics directly as text strings
@@ -122,11 +109,6 @@ def main(session):
         # we can unload all topics and free the associated memory
         ALDialog.unloadTopic(topic_name_1)
         ALDialog.unloadTopic(topic_name_2)
-        
-        # Stop tracker.
-        tracker_service.stopTracker()
-        tracker_service.unregisterAllTargets()
-        motion_service.rest()
 
 
 if __name__ == "__main__":
